@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Important Question</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+html, body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('backpic.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: 'Pacifico', cursive;
+}
+h1 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 200px;
+  margin-top: -50px;
+  text-align: center;
+  text-shadow:
+    2px 2px 4px rgba(0,0,0,0.5), /* тень */
+    0 0 10px rgba(255,192,203,0.7), /* лёгкий розовый свет */
+    0 0 15px rgba(255,105,180,0.5);
+}
+button {
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Pacifico', cursive;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+  position: absolute; /* для NO */
+}
+#yes {
+  background: linear-gradient(45deg, #ff99cc, #ff66aa); /* розовая кнопка */
+  color: white;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.7); /* розовое свечение */
+}
+#yes:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.9); /* ярче при наведении */
+}
+
+#no {
+  background: linear-gradient(45deg, #ffffff, #cccccc);
+  color: black;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); /* чёрное свечение */
+}
+#no:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.9); /* ярче при наведении */
+}
+
+</style>
+</head>
+<body>
+<h1>Will you be my Valentine?</h1>
+<button id="yes">YES</button>
+<button id="no">NO</button>
+
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+
+// Настраиваем стартовую позицию так, чтобы центр между кнопками совпадал с центром экрана
+function setInitialPosition() {
+    const yesWidth = yesBtn.offsetWidth;
+    const noWidth = noBtn.offsetWidth;
+    const gap = 50; // расстояние между кнопками
+
+    const totalWidth = yesWidth + noWidth + gap;
+    const centerX = window.innerWidth / 2;
+
+    // YES слева от центра
+    yesBtn.style.left = (centerX - totalWidth / 2) + "px";
+    yesBtn.style.top = "50%";
+    yesBtn.style.transform = "translateY(-50%)";
+
+    // NO справа от YES
+    noBtn.style.left = (centerX - totalWidth / 2 + yesWidth + gap) + "px";
+    noBtn.style.top = "50%";
+    noBtn.style.transform = "translateY(-50%)";
+}
+setInitialPosition();
+
+// YES увеличивается при наведении на NO
+let scale = 1;
+
+// NO убегает на весь экран при наведении
+noBtn.addEventListener("mouseover", () => {
+    scale += 0.2;
+    yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
+
+    const padding = 10;
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+});
+
+// Клики
+yesBtn.onclick = () => window.location.href = "option1.html";
+noBtn.onclick = () => window.location.href = "option2.html";
+
+// Обновляем позиции при ресайзе окна
+window.addEventListener('resize', setInitialPosition);
+</script>
+</body>
+</html>
+
+
