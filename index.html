@@ -16,7 +16,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('backpic.jpg'); /* фон стартового экрана */
+  background-image: url('backpic.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -38,7 +38,6 @@ body {
   margin-bottom: 20px;
 }
 #startScreen button {
-  position: relative;
   margin: 10px;
   padding: 15px 30px;
   font-size: 1.5rem;
@@ -88,13 +87,16 @@ body {
   margin-bottom: 50px;
 }
 
-/* Контейнер кнопок Valentine для центрирования */
+/* Контейнер кнопок Valentine */
 #valentineButtons {
   display: flex;
   gap: 50px;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Кнопки YES/NO */
@@ -130,7 +132,7 @@ body {
 </head>
 <body>
 
-<!-- СТАРТОВЫЙ ЭКРАН -->
+<!-- START SCREEN -->
 <div id="startScreen">
   <h1>Как ты?</h1>
   <div id="choices">
@@ -141,7 +143,7 @@ body {
   <div id="message">Cообщение</div>
 </div>
 
-<!-- VALENTINE ЭКРАН -->
+<!-- VALENTINE SCREEN -->
 <div id="valentineScreen">
   <h1>Will you be my Valentine?</h1>
   <div id="valentineButtons">
@@ -163,6 +165,7 @@ const choices = document.getElementById("choices");
 // Valentine кнопки
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
+
 let scale = 1; // масштаб YES
 
 // Функция показа текста и уведомления
@@ -172,11 +175,10 @@ function showMessage(text) {
   setTimeout(() => { message.style.display = "block"; }, 1000);
 }
 
-// Кнопки стартового экрана
+// StartScreen
 goodBtn.onclick = () => showMessage("Я рада!");
 badBtn.onclick = () => showMessage("Жаль.");
-
-  // Переход к Valentine экрану
+// Переход к Valentine
 message.onclick = () => {
   startScreen.style.display = "none";
   valentineScreen.style.display = "flex";
@@ -184,7 +186,7 @@ message.onclick = () => {
   noBtn.addEventListener("mouseover", moveNoButton);
 };
 
-// Устанавливаем стартовую позицию YES/NO по центру
+// Устанавливаем центр кнопок Valentine
 function setInitialPosition() {
   const valentineButtons = document.getElementById("valentineButtons");
   valentineButtons.style.left = "50%";
@@ -193,22 +195,26 @@ function setInitialPosition() {
   valentineButtons.style.transform = "translate(-50%, -50%)";
 }
 
-// Двигаем NO случайно по экрану при hover
+// Движение NO и увеличение YES
 function moveNoButton() {
-  scale += 0.2; // YES растёт
-  yesBtn.style.transform = scale(${scale});
+  // Увеличиваем YES
+  scale += 0.2;
+  yesBtn.style.transform = translateY(-50%) scale(${scale});
 
+  // Двигаем NO случайно
   const padding = 10;
   const maxX = window.innerWidth - noBtn.offsetWidth - padding;
   const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
-  noBtn.style.position = "absolute"; // делаем absolute только при движении
+
+  noBtn.style.position = "absolute";
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 }
 
-// Переходы по клику
+// YES/NO переходы
 yesBtn.onclick = () => window.location.href = "option1.html";
 noBtn.onclick = () => window.location.href = "option2.html";
 
