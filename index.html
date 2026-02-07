@@ -64,7 +64,7 @@ button {
   box-shadow: 0 8px 25px rgba(0,0,0,0.9); /* ярче при наведении */
 }
 #startScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-#valentine { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+#valentineScreen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
 #message { display: none; cursor: pointer; margin-top: 20px; padding: 10px 20px; background: yellow; border-radius: 10px; }
 
 </style>
@@ -82,7 +82,7 @@ button {
 </div>
 
 <!-- ЭТО ЭКРАН VALENTINE -->
-<div id="valentine">
+<div id="valentineScreen">
   <h1>Will you be my Valentine? 💘</h1>
   <button id="yes">YES</button>
   <button id="no">NO</button>
@@ -94,7 +94,7 @@ button {
 const badBtn = document.getElementById("bad");
 const response = document.getElementById("response");
 const message = document.getElementById("message");
-const valentine = document.getElementById("valentine");
+const valentineScreen = document.getElementById("valentineScreen");
 const choices = document.getElementById("choices");
 const startScreen = document.getElementById("startScreen");
 
@@ -115,7 +115,7 @@ badBtn.onclick = () => showMessage("Очень тебя жаль, что так 
 // Клик по уведомлению
 message.onclick = () => {
   startScreen.style.display = "none"; // скрыть стартовый экран
-  valentine.style.display = "flex";   // показать Valentine экран
+  valentineScreen.style.display = "flex";   // показать Valentine экран
 };
   
 const yesBtn = document.getElementById("yes");
@@ -172,6 +172,7 @@ window.addEventListener('resize', setInitialPosition);
 </script>
 </body>
 </html>
+
 
 
 
