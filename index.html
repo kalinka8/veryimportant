@@ -199,7 +199,7 @@ function setInitialPosition() {
 function moveNoButton() {
   // Увеличиваем YES
   scale += 0.2;
-  yesBtn.style.transform = translateY(-50%) scale(${scale});
+  yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
 
   // Двигаем NO случайно
   const padding = 10;
@@ -226,3 +226,4 @@ window.addEventListener('resize', () => {
 
 </body>
 </html>
+
