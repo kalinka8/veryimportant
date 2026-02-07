@@ -166,16 +166,18 @@ function showMessage(text) {
   response.textContent = text;
   response.style.opacity = 1;
 
-  // плавное появление followup
-  setTimeout(() => {
-    followup.style.opacity = 1;
-  }, 800);
-
   // появление сообщения
   setTimeout(() => {
     message.style.display = "block";
     message.style.opacity = 1;
   }, 1500);
+  
+  // плавное появление followup
+  setTimeout(() => {
+    followup.style.opacity = 1;
+  }, 800);
+
+
 }
 
 // Good/Bad кликабельны
@@ -233,4 +235,5 @@ window.addEventListener('resize', setInitialPosition);
 
 </body>
 </html>
+
 
