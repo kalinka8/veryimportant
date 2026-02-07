@@ -101,7 +101,8 @@ const startScreen = document.getElementById("startScreen");
 // Показ уведомления после выбора
 function showMessage(text) {
   response.innerHTML = text;
-  choices.style.display = "none";
+  
+  document.getElementById("choices").style.display = "none";
 
   setTimeout(() => {
     message.style.display = "block";
@@ -172,6 +173,7 @@ window.addEventListener('resize', setInitialPosition);
 </script>
 </body>
 </html>
+
 
 
 
