@@ -79,12 +79,19 @@ body {
   top: 30px;
   cursor: pointer;
   padding: 10px 20px;
-  background: yellow;
-  border-radius: 10px;
   font-weight: bold;
   font-family: 'Pacifico', cursive;
   transition: opacity 0.5s;
+  background: linear-gradient(45deg, #ff99cc, #ff66aa);
+  color: white;
+  box-shadow: 0 5px 15px rgba(255,105,180,0.7);
+  border-radius: 10px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 }
+  #message:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255,105,180,0.9);
+  }
 
 /* VALENTINE SCREEN */
 #valentineScreen {
@@ -235,6 +242,7 @@ window.addEventListener('resize', setInitialPosition);
 
 </body>
 </html>
+
 
 
 
