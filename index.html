@@ -38,10 +38,9 @@ body {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255,192,203,0.7);
   margin-bottom: 20px;
 }
-
 /* Стартовые кнопки Good/Bad */
 #startScreen button {
-  position: relative;  /* важное отличие от YES/NO */
+  position: relative;
   margin: 10px;
   padding: 15px 30px;
   font-size: 1.5rem;
@@ -95,7 +94,7 @@ body {
 
 /* Кнопки Valentine */
 #yes, #no {
-  position: absolute;  /* для движения NO */
+  position: absolute;
   padding: 15px 30px;
   font-size: 1.5rem;
   border-radius: 12px;
@@ -176,17 +175,20 @@ message.onclick = () => {
   setInitialPosition();
   noBtn.addEventListener("mouseover", moveNoButton);
 };
-  // Устанавливаем стартовую позицию YES/NO
+  // Устанавливаем стартовую позицию YES/NO по центру
 function setInitialPosition() {
     const yesWidth = yesBtn.offsetWidth;
     const noWidth = noBtn.offsetWidth;
-    const gap = 50;
-    const totalWidth = yesWidth + noWidth + gap;
+    const gap = 50; // расстояние между кнопками
     const centerX = window.innerWidth / 2;
-    yesBtn.style.left = (centerX - totalWidth / 2) + "px";
+
+    // левая позиция YES так, чтобы центр между кнопками был по центру экрана
+    yesBtn.style.left = (centerX - (yesWidth + noWidth + gap)/2) + "px";
     yesBtn.style.top = "50%";
     yesBtn.style.transform = "translateY(-50%)";
-    noBtn.style.left = (centerX - totalWidth / 2 + yesWidth + gap) + "px";
+
+    // NO справа от YES
+    noBtn.style.left = (centerX - (yesWidth + noWidth + gap)/2 + yesWidth + gap) + "px";
     noBtn.style.top = "50%";
     noBtn.style.transform = "translateY(-50%)";
 }
@@ -214,3 +216,4 @@ window.addEventListener('resize', () => {
 
 </body>
 </html>
+
