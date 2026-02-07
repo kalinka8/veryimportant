@@ -201,7 +201,7 @@ function setInitialPosition() {
 // Движение NO и увеличение YES
 function moveNoButton() {
   scale += 0.2;
-  yesBtn.style.transform = scale(${scale}); // YES увеличивается и остаётся в центре
+  yesBtn.style.transform = `scale(${scale})`; // YES увеличивается и остаётся в центре
 
   const padding = 10;
   const maxX = window.innerWidth - noBtn.offsetWidth - padding;
@@ -226,3 +226,4 @@ window.addEventListener('resize', () => {
 
 </body>
 </html>
+
