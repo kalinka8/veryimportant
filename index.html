@@ -10,15 +10,16 @@ html, body {
   height: 100vh;
   overflow: hidden;
   font-family: 'Pacifico', cursive;
-  background-image: url('backpic.jpg'); /* фон стартового экрана */
+  background-image: url('backpic.jpg');
   background-size: cover;
   background-position: center;
 }
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-top: 100px; /* подняли вопрос выше */
 }
 
 /* START SCREEN */
@@ -27,16 +28,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
   position: relative;
   z-index: 10;
-  padding-top: 100px; /* подняли вопрос выше */
 }
 #startScreen h1 {
   color: white;
   font-size: 3rem;
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255,192,203,0.7);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5),0 0 10px rgba(255,192,203,0.7);
   margin-bottom: 20px;
   transition: opacity 0.5s;
 }
@@ -79,29 +78,18 @@ body {
 /* VALENTINE SCREEN */
 #valentineScreen {
   display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
   position: relative;
-  z-index: 1;
+  width: 100%;
+  height: 100vh;
 }
 #valentineScreen h1 {
   color: white;
   font-size: 3rem;
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255,192,203,0.7);
-  margin-bottom: 100px; /* подняли вопрос выше */
-}
-#valentineButtons {
-  display: flex;
-  gap: 50px;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5),0 0 10px rgba(255,192,203,0.7);
+  margin-bottom: 50px; 
+  position: relative;
+  top: 50px; /* подняли вопрос выше */
 }
 #yes, #no {
   padding: 15px 30px;
@@ -114,11 +102,13 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   transition: transform 0.2s;
   font-family: 'Pacifico', cursive;
+  position: absolute;
 }
-#yes { background: linear-gradient(45deg, #ff99cc, #ff66aa); color: white; }
-#no { background: linear-gradient(45deg, #fff, #ccc); color: black; }
+#yes { background: linear-gradient(45deg, #ff99cc, #ff66aa); color: white; box-shadow: 0 5px 15px rgba(255,105,180,0.7);}
+#no { background: linear-gradient(45deg, #fff, #ccc); color: black; box-shadow: 0 5px 15px rgba(0,0,0,0.7);}
 #yes:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(255,105,180,0.9); }
 #no:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.9); }
+
 </style>
 </head>
 <body>
@@ -130,17 +120,15 @@ body {
     <button id="good">Good.</button>
     <button id="bad">Bad.</button>
   </div>
-  <div id="response"> </div>
+  <div id="response"></div>
   <div id="message">Сообщение</div>
 </div>
 
 <!-- VALENTINE SCREEN -->
 <div id="valentineScreen">
   <h1>Will you be my Valentine?</h1>
-  <div id="valentineButtons">
-    <button id="yes">YES</button>
-    <button id="no">NO</button>
-  </div>
+  <button id="yes">YES</button>
+  <button id="no">NO</button>
 </div>
 
 <script>
@@ -158,48 +146,52 @@ const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 let scale = 1;
 
-// Функция показа текста и уведомления с задержкой
+// Задержка появления сообщения и скрытие вопроса
 function showMessage(text) {
-  // скрываем вопрос и кнопки
   startScreen.querySelector("h1").style.opacity = 0;
   choices.style.display = "none";
-
-// показываем текст ответа
   response.textContent = text;
   response.style.opacity = 1;
 
-  // через 1.5 секунды показываем сообщение в правом верхнем углу
   setTimeout(() => {
     message.style.display = "block";
     message.style.opacity = 1;
-  }, 1500);
+  }, 1500); // чуть медленнее
 }
 
-// StartScreen кнопки
+// Кнопки Good/Bad
 goodBtn.onclick = () => showMessage("Я рада!");
 badBtn.onclick = () => showMessage("Жаль.");
 
 // Переход к Valentine экрану
 message.onclick = () => {
   startScreen.style.display = "none";
-  valentineScreen.style.display = "flex";
+  valentineScreen.style.display = "block";
   setInitialPosition();
   noBtn.addEventListener("mouseover", moveNoButton);
 };
 
-// Центрируем контейнер кнопок Valentine
+// Центрирование YES/NO
 function setInitialPosition() {
-  const valentineButtons = document.getElementById("valentineButtons");
-  valentineButtons.style.left = "50%";
-  valentineButtons.style.top = "50%";
-  valentineButtons.style.position = "absolute";
-  valentineButtons.style.transform = "translate(-50%, -50%)";
+  const yesWidth = yesBtn.offsetWidth;
+  const noWidth = noBtn.offsetWidth;
+  const gap = 50;
+  const totalWidth = yesWidth + noWidth + gap;
+  const centerX = window.innerWidth / 2;
+
+  yesBtn.style.left = (centerX - totalWidth / 2) + "px";
+  yesBtn.style.top = "50%";
+  yesBtn.style.transform = "translateY(-50%)";
+
+  noBtn.style.left = (centerX - totalWidth / 2 + yesWidth + gap) + "px";
+  noBtn.style.top = "50%";
+  noBtn.style.transform = "translateY(-50%)";
 }
 
 // Движение NO и увеличение YES
 function moveNoButton() {
   scale += 0.2;
-  yesBtn.style.transform = `scale(${scale})`; // YES увеличивается и остаётся в центре
+  yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
 
   const padding = 10;
   const maxX = window.innerWidth - noBtn.offsetWidth - padding;
@@ -207,23 +199,18 @@ function moveNoButton() {
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
 
-  noBtn.style.position = 'fixed';
   noBtn.style.left = x + 'px';
   noBtn.style.top = y + 'px';
+  noBtn.style.position = 'fixed';
 }
 
-// Переходы по клику
+// Переход по клику
 yesBtn.onclick = () => window.location.href = "option1.html";
 noBtn.onclick = () => window.location.href = "option2.html";
 
-// Центрирование при ресайзе
-window.addEventListener('resize', () => {
-  if (valentineScreen.style.display === "flex") setInitialPosition();
-});
+// Ресайз
+window.addEventListener('resize', setInitialPosition);
 </script>
 
 </body>
 </html>
-
-
-
