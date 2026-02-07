@@ -68,6 +68,7 @@ button {
 #valentineScreen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; position: relative; z-index: 1;}
 #message { display: none; cursor: pointer; margin-top: 20px; padding: 10px 20px; background: yellow; border-radius: 10px; }
 #choices button{display: inline-block;}
+  #startScreen button{position: relative; margin: 10px;}
 </style>
 </head>
 <body>
@@ -119,6 +120,7 @@ message.onclick = () => {
   startScreen.style.display = "none"; // скрыть стартовый экран
   valentineScreen.style.display = "flex";   // показать Valentine экран
   setInitialPosition();
+  noBtn.addEventListener("mouseover", moveNoButton);
 };
   
 const yesBtn = document.getElementById("yes");
@@ -148,11 +150,7 @@ setInitialPosition();
 // YES увеличивается при наведении на NO
 let scale = 1;
 
-// NO убегает на весь экран при наведении
-noBtn.addEventListener("mouseover", () => {
-    scale += 0.2;
-    yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
-
+function moveNoButton(){
     const padding = 10;
     const maxX = window.innerWidth - noBtn.offsetWidth - padding;
     const maxY = window.innerHeight - noBtn.offsetHeight - padding;
@@ -175,6 +173,7 @@ window.addEventListener('resize', setInitialPosition);
 </script>
 </body>
 </html>
+
 
 
 
