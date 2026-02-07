@@ -63,8 +63,8 @@ button {
   transform: scale(1.05);
   box-shadow: 0 8px 25px rgba(0,0,0,0.9); /* ярче при наведении */
 }
-#startScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-#valentineScreen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+#startScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; position: relative; z-index: 10;}
+#valentineScreen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; position: relative; z-index: 1;}
 #message { display: none; cursor: pointer; margin-top: 20px; padding: 10px 20px; background: yellow; border-radius: 10px; }
 #choices button{display: inline-block;}
 </style>
@@ -117,6 +117,7 @@ badBtn.onclick = () => showMessage("Очень тебя жаль, что так 
 message.onclick = () => {
   startScreen.style.display = "none"; // скрыть стартовый экран
   valentineScreen.style.display = "flex";   // показать Valentine экран
+  setInitialPosition();
 };
   
 const yesBtn = document.getElementById("yes");
@@ -173,6 +174,7 @@ window.addEventListener('resize', setInitialPosition);
 </script>
 </body>
 </html>
+
 
 
 
