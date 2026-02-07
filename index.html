@@ -63,13 +63,30 @@ button {
   transform: scale(1.05);
   box-shadow: 0 8px 25px rgba(0,0,0,0.9); /* ярче при наведении */
 }
+#startScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+#valentine { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+#message { display: none; cursor: pointer; margin-top: 20px; padding: 10px 20px; background: yellow; border-radius: 10px; }
 
 </style>
 </head>
 <body>
-<h1>Will you be my Valentine?</h1>
-<button id="yes">YES</button>
-<button id="no">NO</button>
+  <!-- ЭТО СТАРТОВЫЙ ЭКРАН -->
+<div id="startScreen">
+  <h1>Привет, как ты поживаешь?</h1>
+  <div id="choices">
+    <button id="good">Хорошо</button>
+    <button id="bad">Не очень</button>
+  </div>
+  <div id="response"></div>
+  <div id="message">Ой, кажется тебе пришло сообщение, прочитай!</div>
+</div>
+
+<!-- ЭТО ЭКРАН VALENTINE -->
+<div id="valentine">
+  <h1>Will you be my Valentine? 💘</h1>
+  <button id="yes">YES</button>
+  <button id="no">NO</button>
+</div>
 
 <script>
 const yesBtn = document.getElementById("yes");
@@ -121,8 +138,37 @@ noBtn.onclick = () => window.location.href = "option2.html";
 
 // Обновляем позиции при ресайзе окна
 window.addEventListener('resize', setInitialPosition);
+
+  const goodBtn = document.getElementById("good");
+const badBtn = document.getElementById("bad");
+const response = document.getElementById("response");
+const message = document.getElementById("message");
+const valentine = document.getElementById("valentine");
+const choices = document.getElementById("choices");
+const startScreen = document.getElementById("startScreen");
+
+// Показ уведомления после выбора
+function showMessage(text) {
+  response.innerHTML = text;
+  choices.style.display = "none";
+
+  setTimeout(() => {
+    message.style.display = "block";
+  }, 1000);
+}
+
+// Ветки выбора
+goodBtn.onclick = () => showMessage("Я рада, что у тебя всё хорошо 💖");
+badBtn.onclick = () => showMessage("Очень тебя жаль, что так получилось 😔");
+
+// Клик по уведомлению
+message.onclick = () => {
+  startScreen.style.display = "none"; // скрыть стартовый экран
+  valentine.style.display = "flex";   // показать Valentine экран
+};
 </script>
 </body>
 </html>
+
 
 
