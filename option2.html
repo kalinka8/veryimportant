@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Really no?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  color: white;
+  font-family: 'Pacifico', cursive;
+  overflow: hidden;
+  transition: background 0.5s;
+}
+
+/* Контейнер кнопка + видео */
+.container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Видео */
+.video {
+  width: 200px; /* регулируешь размер */
+  border-radius: 20px;
+  box-shadow: 0 0 20px white;
+}
+
+/* Кнопка */
+button {
+  padding: 20px 50px;
+  font-size: 2.5rem;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: black;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 0 20px white;
+  font-family: 'Pacifico', cursive;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Текст WHO ASKED */
+#whoText {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 6rem;
+  font-weight: 900;
+  color: black;
+  text-shadow:
+    0 0 10px orange,
+    0 0 30px orange,
+    0 0 60px yellow;
+  transition: 0.3s;
+  z-index: 2;
+  white-space: nowrap;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <video class="video" src="gifka.mp4" autoplay loop muted></video>
+  <button id="whoBtn">WHO?</button>
+</div>
+
+<div id="whoText">WHO ASKED? 💀</div>
+
+<script>
+const btn = document.getElementById("whoBtn");
+const text = document.getElementById("whoText");
+
+btn.onclick = () => {
+  // скрываем кнопку и видео
+  document.querySelector(".container").style.display = "none";
+
+  // меняем фон
+  document.body.style.backgroundImage = "url('pic2.jpg')";
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center";
+
+  // показываем текст
+  text.style.transform = "translate(-50%, -50%) scale(1)";
+
+  // тряска экрана
+  let shake = 0;
+  const interval = setInterval(() => {
+    document.body.style.transform = `translate(${Math.random()*20-10}px, ${Math.random()*20-10}px)`;
+    shake++;
+    if (shake > 20) {
+      clearInterval(interval);
+      document.body.style.transform = "translate(0,0)";
+    }
+  }, 30);
+};
+</script>
+
+</body>
+</html>
