@@ -63,10 +63,18 @@ button {
   transform: scale(1.05);
   box-shadow: 0 8px 25px rgba(0,0,0,0.9); /* ярче при наведении */
 }
-  #valentine { display: none; }       /* старый Valentine скрыт пока */
-#message { display: none; cursor: pointer; margin-top: 20px; padding: 10px 20px; background: yellow; border-radius: 10px; }
+#valentine {
+  display: none; /* старый вопрос YES/NO будет скрыт */
+}
 
-
+#message {
+  display: none; 
+  cursor: pointer;
+  margin-top: 20px; 
+  padding: 10px 20px; 
+  background: yellow; 
+  border-radius: 10px;
+}
 </style>
 </head>
 <body>
@@ -143,28 +151,29 @@ const valentine = document.getElementById("valentine");
 const choices = document.getElementById("choices");
 const startScreen = document.getElementById("startScreen");
 
-// Функция показа уведомления и скрытия выбора
+// Показываем текст после выбора
 function showMessage(text) {
   response.innerHTML = text;
   choices.style.display = "none"; // скрываем кнопки Хорошо/Не очень
 
   setTimeout(() => {
     message.style.display = "block"; // появляется уведомление
-  }, 1000); // через секунду
+  }, 1000);
 }
 
-// Ветки выбора
+// Ветки
 goodBtn.onclick = () => showMessage("Я рада, что у тебя всё хорошо 💖");
 badBtn.onclick = () => showMessage("Очень тебя жаль, что так получилось 😔");
 
 // При клике на уведомление показываем старый Valentine
 message.onclick = () => {
-  startScreen.style.display = "none";  // скрываем стартовый экран
-  valentine.style.display = "block";   // показываем старый Valentine
+  startScreen.style.display = "none";  // скрыть стартовый экран
+  valentine.style.display = "block";   // показать старый Valentine
 };
 </script>
 </body>
 </html>
+
 
 
 
