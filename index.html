@@ -89,6 +89,35 @@ button {
 </div>
 
 <script>
+
+  const goodBtn = document.getElementById("good");
+const badBtn = document.getElementById("bad");
+const response = document.getElementById("response");
+const message = document.getElementById("message");
+const valentine = document.getElementById("valentine");
+const choices = document.getElementById("choices");
+const startScreen = document.getElementById("startScreen");
+
+// Показ уведомления после выбора
+function showMessage(text) {
+  response.innerHTML = text;
+  choices.style.display = "none";
+
+  setTimeout(() => {
+    message.style.display = "block";
+  }, 1000);
+}
+
+// Ветки выбора
+goodBtn.onclick = () => showMessage("Я рада, что у тебя всё хорошо 💖");
+badBtn.onclick = () => showMessage("Очень тебя жаль, что так получилось 😔");
+
+// Клик по уведомлению
+message.onclick = () => {
+  startScreen.style.display = "none"; // скрыть стартовый экран
+  valentine.style.display = "flex";   // показать Valentine экран
+};
+  
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 
@@ -139,36 +168,11 @@ noBtn.onclick = () => window.location.href = "option2.html";
 // Обновляем позиции при ресайзе окна
 window.addEventListener('resize', setInitialPosition);
 
-  const goodBtn = document.getElementById("good");
-const badBtn = document.getElementById("bad");
-const response = document.getElementById("response");
-const message = document.getElementById("message");
-const valentine = document.getElementById("valentine");
-const choices = document.getElementById("choices");
-const startScreen = document.getElementById("startScreen");
 
-// Показ уведомления после выбора
-function showMessage(text) {
-  response.innerHTML = text;
-  choices.style.display = "none";
-
-  setTimeout(() => {
-    message.style.display = "block";
-  }, 1000);
-}
-
-// Ветки выбора
-goodBtn.onclick = () => showMessage("Я рада, что у тебя всё хорошо 💖");
-badBtn.onclick = () => showMessage("Очень тебя жаль, что так получилось 😔");
-
-// Клик по уведомлению
-message.onclick = () => {
-  startScreen.style.display = "none"; // скрыть стартовый экран
-  valentine.style.display = "flex";   // показать Valentine экран
-};
 </script>
 </body>
 </html>
+
 
 
 
