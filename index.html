@@ -50,11 +50,22 @@ body {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   transition: transform 0.2s;
+  font-family: 'Pacifico', cursive;
 }
 #startScreen button:hover { transform: scale(1.1); }
+
 #response {
   margin-top: 20px;
   font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+#followup {
+  margin-top: 10px;
+  font-size: 1.5rem;
   font-weight: bold;
   color: white;
   text-align: center;
@@ -89,7 +100,7 @@ body {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5),0 0 10px rgba(255,192,203,0.7);
   margin-bottom: 50px; 
   position: relative;
-  top: 50px; /* подняли вопрос выше */
+  top: 50px;
 }
 #yes, #no {
   padding: 15px 30px;
@@ -108,7 +119,6 @@ body {
 #no { background: linear-gradient(45deg, #fff, #ccc); color: black; box-shadow: 0 5px 15px rgba(0,0,0,0.7);}
 #yes:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(255,105,180,0.9); }
 #no:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.9); }
-
 </style>
 </head>
 <body>
@@ -121,6 +131,7 @@ body {
     <button id="bad">Bad.</button>
   </div>
   <div id="response"></div>
+  <div id="followup">Прочитай сообщение</div>
   <div id="message">Сообщение</div>
 </div>
 
@@ -136,6 +147,7 @@ body {
 const goodBtn = document.getElementById("good");
 const badBtn = document.getElementById("bad");
 const response = document.getElementById("response");
+const followup = document.getElementById("followup");
 const message = document.getElementById("message");
 const startScreen = document.getElementById("startScreen");
 const valentineScreen = document.getElementById("valentineScreen");
@@ -146,20 +158,27 @@ const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 let scale = 1;
 
-// Задержка появления сообщения и скрытие вопроса
+// Показ текста и сообщения с задержкой
 function showMessage(text) {
   startScreen.querySelector("h1").style.opacity = 0;
   choices.style.display = "none";
+
   response.textContent = text;
   response.style.opacity = 1;
 
+  // плавное появление followup
+  setTimeout(() => {
+    followup.style.opacity = 1;
+  }, 800);
+
+  // появление сообщения
   setTimeout(() => {
     message.style.display = "block";
     message.style.opacity = 1;
-  }, 1500); // чуть медленнее
+  }, 1500);
 }
 
-// Кнопки Good/Bad
+// Good/Bad кликабельны
 goodBtn.onclick = () => showMessage("Я рада!");
 badBtn.onclick = () => showMessage("Жаль.");
 
@@ -204,7 +223,7 @@ function moveNoButton() {
   noBtn.style.position = 'fixed';
 }
 
-// Переход по клику
+// Клики YES/NO
 yesBtn.onclick = () => window.location.href = "option1.html";
 noBtn.onclick = () => window.location.href = "option2.html";
 
@@ -214,3 +233,4 @@ window.addEventListener('resize', setInitialPosition);
 
 </body>
 </html>
+
