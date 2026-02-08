@@ -30,7 +30,9 @@ body {
   max-width: 600px;
   text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
   margin-bottom: 50px;
-  transition: font-size 0.5s ease;
+    opacity: 0;
+    transform: scale(0.8);
+  transition: font-size 1.5s ease;
 }
 
 button {
@@ -59,7 +61,14 @@ button:hover {
 <script>
 const text = document.getElementById("text");
 const btn = document.getElementById("nextBtn");
+window.onload = () => {
+    setTimeout(() => {
+        const t = document.getElementById("text");
+        t.style.opacity = 1;
+        t.style.transform = "scale(1)";
+    }, 1000);
 
+};
 btn.onclick = () => {
   text.textContent = "I love you...";
   text.style.fontSize = "5rem";
@@ -68,4 +77,5 @@ btn.onclick = () => {
 </script>
 
 </body>
+
 </html>
